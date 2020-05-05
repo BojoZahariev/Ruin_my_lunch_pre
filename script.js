@@ -13,10 +13,13 @@ fetch('https://edamam-edamam-nutrition-analysis.p.rapidapi.com/api/nutrition-dat
     console.log(err);
   });
 */
-const getTodayData = async () => {
+const foodInput = document.querySelector('#input1');
+const buttonSubmit = document.querySelector('#buttonSubmit');
+
+const getTodayData = async (food) => {
   try {
     const response = await fetch(
-      'https://edamam-edamam-nutrition-analysis.p.rapidapi.com/api/nutrition-data?ingr=1%20large%20apple',
+      `https://edamam-edamam-nutrition-analysis.p.rapidapi.com/api/nutrition-data?ingr=${food}`,
       {
         method: 'GET',
         headers: {
@@ -28,7 +31,14 @@ const getTodayData = async () => {
     const fetchedData = await response.json();
 
     console.log(fetchedData);
+    console.log(fetchedData.calories);
   } catch (err) {}
 };
 
-getTodayData();
+//SUBMIT
+buttonSubmit.addEventListener('click', () => {
+  console.log(foodInput.value);
+  getTodayData(foodInput.value);
+});
+
+//getTodayData();
