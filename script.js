@@ -16,6 +16,7 @@ fetch('https://edamam-edamam-nutrition-analysis.p.rapidapi.com/api/nutrition-dat
 const foodInput = document.querySelector('#input1');
 const buttonSubmit = document.querySelector('#buttonSubmit');
 const caloriesText = document.querySelector('#caloriesText');
+const milesText = document.querySelector('#milesText');
 
 const getTodayData = async (food) => {
   try {
@@ -32,7 +33,9 @@ const getTodayData = async (food) => {
     const fetchedData = await response.json();
 
     console.log(fetchedData);
+
     caloriesText.textContent = fetchedData.calories;
+    milesText.textContent = `${fetchedData.calories / 100} miles`;
   } catch (err) {}
 };
 
@@ -41,5 +44,3 @@ buttonSubmit.addEventListener('click', () => {
   console.log(foodInput.value);
   getTodayData(foodInput.value);
 });
-
-//getTodayData();
