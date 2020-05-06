@@ -35,7 +35,7 @@ const getTodayData = async (food) => {
     console.log(fetchedData);
 
     caloriesText.textContent = fetchedData.calories;
-    milesText.textContent = `${Math.round(fetchedData.calories / 100)} miles`;
+    milesText.textContent = `${Math.round((fetchedData.calories / 100) * 10) / 10} miles`;
   } catch (err) {}
 };
 
