@@ -52,36 +52,35 @@ const display = (data) => {
 };
 */
 
-class GetInput extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <h3>Get Input:</h3>
-        <form onSubmit={this.props.handleSubmit}>
-          <input value={this.props.input} onChange={this.props.handleChange} />
-          <button type='submit'>Submit!</button>
-        </form>
-      </div>
-    );
-  }
-}
+const GetInput = (props) => {
+  return (
+    <div>
+      <h3>Get Input:</h3>
+      <form onSubmit={props.handleSubmit}>
+        <input value={props.input} onChange={props.handleChange} />
+        <button type='submit'>Submit!</button>
+      </form>
+    </div>
+  );
+};
 
-class RenderInput extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <div>
-        <h3>Input Render:</h3>
-        <p>{this.props.calories}</p>
-      </div>
-    );
-  }
-}
+const Total = (props) => {
+  return (
+    <div>
+      <h3>Calories:</h3>
+      <p>{props.calories}</p>
+    </div>
+  );
+};
+
+const Exercise = (props) => {
+  return (
+    <div>
+      <h3>To burn that:</h3>
+      <p>{`You need to run ${Math.round((props.calories / 100) * 10) / 10} miles`}</p>
+    </div>
+  );
+};
 
 class Container extends React.Component {
   constructor(props) {
@@ -134,7 +133,8 @@ class Container extends React.Component {
         {/* change code below this line */}
         <GetInput input={this.state.inputValue} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
 
-        <RenderInput calories={this.state.calories} />
+        <Total calories={this.state.calories} />
+        {this.state.calories !== '' ? <Exercise calories={this.state.calories} /> : null}
         {/* change code above this line */}
       </div>
     );
