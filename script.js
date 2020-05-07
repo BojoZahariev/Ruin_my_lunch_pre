@@ -35,7 +35,7 @@ const getTodayData = async (food) => {
     console.log(fetchedData);
 
     caloriesText.textContent = fetchedData.calories;
-    milesText.textContent = `${Math.round((fetchedData.calories / 100) * 10) / 10} miles`;
+    display(fetchedData);
   } catch (err) {}
 };
 
@@ -44,3 +44,7 @@ buttonSubmit.addEventListener('click', () => {
   console.log(foodInput.value);
   getTodayData(foodInput.value);
 });
+
+const display = (data) => {
+  milesText.textContent = `You need to run ${Math.round((data.calories / 100) * 10) / 10} miles`;
+};
