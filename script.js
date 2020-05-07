@@ -78,6 +78,8 @@ const Exercise = (props) => {
     <div>
       <h3>To burn that:</h3>
       <p>{`You need to run ${Math.round((props.calories / 100) * 10) / 10} miles`}</p>
+      <p>{`You need to cycle for ${Math.round((props.calories / 600) * 10) / 10} hours`}</p>
+      <p>{`You need to lift weights for ${Math.round((props.calories / 250) * 10) / 10} hours`}</p>
     </div>
   );
 };
@@ -130,12 +132,10 @@ class Container extends React.Component {
   render() {
     return (
       <div>
-        {/* change code below this line */}
         <GetInput input={this.state.inputValue} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
 
         <Total calories={this.state.calories} />
         {this.state.calories !== '' ? <Exercise calories={this.state.calories} /> : null}
-        {/* change code above this line */}
       </div>
     );
   }
