@@ -52,49 +52,57 @@ const display = (data) => {
 };
 */
 
-class ControlledInput extends React.Component {
+class GetInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      input: '',
-    };
-
-    this.handleChange = this.handleChange.bind(this);
   }
-
-  handleChange(event) {
-    this.setState({
-      input: event.target.value,
-    });
-  }
-
   render() {
     return (
       <div>
-        <input type='text' value={this.state.input} onChange={this.handleChange} />
+        <h3>Get Input:</h3>
+        <form onSubmit={this.props.handleSubmit}>
+          <input value={this.props.input} onChange={this.props.handleChange} />
+          <button type='submit'>Submit!</button>
+        </form>
       </div>
     );
   }
 }
 
-class MyForm extends React.Component {
+class RenderInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Input Render:</h3>
+        <p>{this.props.input}</p>
+      </div>
+    );
+  }
+}
+
+class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: '',
+      inputValue: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getTodayData = this.getTodayData.bind(this);
   }
+
   handleChange(event) {
     this.setState({
-      input: event.target.value,
+      inputValue: event.target.value,
     });
   }
+
   handleSubmit(event) {
     event.preventDefault();
-    this.getTodayData(this.state.input);
+    this.getTodayData(this.state.inputValue);
   }
 
   getTodayData = async (food) => {
@@ -119,31 +127,11 @@ class MyForm extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type='text' value={this.state.input} onChange={this.handleChange} />
+        {/* change code below this line */}
+        <GetInput input={this.state.inputValue} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
 
-          <button type='submit'>Submit!</button>
-        </form>
-      </div>
-    );
-  }
-}
-
-class Container extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      mtd: '',
-      clicked: false,
-    };
-  }
-
-  render() {
-    return (
-      <div className='container'>
-        {/*<ControlledInput />*/}
-        <MyForm />
+        <RenderInput input={this.state.inputValue} />
+        {/* change code above this line */}
       </div>
     );
   }
