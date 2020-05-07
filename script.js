@@ -77,7 +77,7 @@ class RenderInput extends React.Component {
     return (
       <div>
         <h3>Input Render:</h3>
-        <p>{this.props.input}</p>
+        <p>{this.props.calories}</p>
       </div>
     );
   }
@@ -88,6 +88,7 @@ class Container extends React.Component {
     super(props);
     this.state = {
       inputValue: '',
+      calories: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -121,16 +122,19 @@ class Container extends React.Component {
 
       console.log(fetchedData);
 
-      console.log(fetchedData.calories);
+      this.setState({
+        calories: fetchedData.calories,
+      });
     } catch (err) {}
   };
+
   render() {
     return (
       <div>
         {/* change code below this line */}
         <GetInput input={this.state.inputValue} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
 
-        <RenderInput input={this.state.inputValue} />
+        <RenderInput calories={this.state.calories} />
         {/* change code above this line */}
       </div>
     );
